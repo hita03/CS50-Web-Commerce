@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <link rel="icon"href="{% static 'images/favicon.png' %}">  
+  <title style="font-family:Lucida Console;">Commerce</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 15px;
+      border-radius: 0;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+      padding-bottom: 5px;
+      padding-top: 3px;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    h1 {
+      font-size: 10px;
+    }
+     
+     #p1{
+       color:white ;
+       font-size:20px;
+     }
+
+     #comment{
+       padding-left:10px;
+       margin-left:100px;
+       font-size:18px;
+       width: 80%;
+     }
+    
+
+    
+  </style>
+</head>
+
+<body>
+{% load static %}
+<div class="jumbotron">
+  <div class="container text-center">
+    <!--<h1 class="w3-serif" style="font-size:40px" > COMMERCE</h1>     -->
+    <div class="row">
+      <div class="col-md-12">
+        <h2 style="font-family:Verdana;font-size:35px;">CS50W</h2>
+        <p>
+        <img style="width:60px;height:60px;" src="{% static "auctions/media/logo1.png" %}" alt="logo" />
+        <img style="width:60px;height:60px;" src="{% static "auctions/media/logo2.png" %}" alt="logo" />
+
+        </p>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    </div>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul>
+        <li style="font-size:20px" class="nav-item"><a href="{% url 'index' %}">Active Listings  </a></li>
+        {% if user.is_authenticated %}
+        <li style="font-size:20px" class="nav-item"><a class="nav-link" href="{% url 'createlisting' %}">Create Listing</a></li>        
+        <li style="font-size:20px" class="nav-item"><a class="nav-link" href="{% url 'categories'  %}">Categories</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <p id="p1">Signed in as <strong>{{ user.username }}</strong>.</p>  
+        {% else %}       
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-road"></span> Register</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-remove-sign"></span> Log Out</a></li> 
+        <li><a href="{% url 'watchlistitems' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Your Watchlist</a></li>
+
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+</body>
+</html>
